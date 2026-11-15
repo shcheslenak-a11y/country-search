@@ -16,8 +16,15 @@
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "format": "npx eslint . --fix",
-    "lint": "npx eslint ."
+    "format": "npx eslint --fix",
+    "lint": "npx eslint .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "npm run format",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
