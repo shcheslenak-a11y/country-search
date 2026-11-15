@@ -14,7 +14,11 @@
   "author": "",
   "type": "module",
   "main": "index.js",
-  
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "format": "npx eslint . --fix",
+    "lint": "npx eslint ."
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
