@@ -18,7 +18,7 @@ export function createMain(
     controller = new AbortController();
     searchCountries(
       query,
-      AbortSignal.any([controller.signal, AbortSignal.timeout(2000)]),
+      AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]),
     )
       .then(mapCountryResponse)
       .then(resultHandler)

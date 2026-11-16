@@ -1,4 +1,7 @@
 import { CardInfo } from "./interfaces.js";
+import { createMain } from "./logic/main.js";
+import { debounce } from "./logic/debounce.js";
+import { Error404 } from "./errors.js";
 
 function createElement(
   tag: string,
@@ -12,12 +15,15 @@ function createElement(
   return element;
 }
 
+const search = debounce(createMain(showResult, e404, showError), 200);
+
 export function init() {
   const header = createElement("header");
-  header.append(
-    createElement("img", { src: "assets/search" }),
-    createElement("input", { id: "search", type: "text" }),
-  );
+  const input = createElement("input", { id: "search", type: "text" });
+  input.addEventListener("input", () => {
+    search((input as HTMLInputElement).value);
+  });
+  header.append(createElement("img", { src: "assets/search" }), input);
 
   const main = createElement("main");
 
@@ -103,4 +109,32 @@ function showResult(data: Array<CardInfo>) {
   const results = createElement("div", { class: "results" });
   results.append(...data.map((item) => createCard(item)));
   main?.append(results);
+}
+
+function e404(err: Error404) {
+  const main = document.getElementsByTagName("main")[0];
+  main?.replaceChildren();
+  const msg = createElement("div", { class: "e404" });
+  msg.append(
+    createElement("h1", {}, "404"),
+    createElement("label", {}, err.message),
+  );
+  main?.append(msg);
+}
+
+function showError(err: Error) {
+  const main = document.getElementsByTagName("main")[0];
+  main?.replaceChildren();
+  const wrapper = createElement("div", { class: "error" });
+  const msg = createElement("div", { class: "e404" });
+  msg.append(
+    createElement("h1", {}, "Something went wrong"),
+    createElement("label", {}, err.message),
+  );
+  const button = createElement("div", { class: "button" }, "Retry");
+  button.addEventListener("click", () => {
+    search((document.getElementById("search") as HTMLInputElement).value);
+  });
+  wrapper.append(msg, button);
+  main?.append(wrapper);
 }
