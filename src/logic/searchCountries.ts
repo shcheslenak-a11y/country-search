@@ -1,5 +1,5 @@
-import { Error404, HTTPError } from "../errors";
-import { Country } from "../interfaces";
+import { Error404, HTTPError } from "../errors.js";
+import { Country } from "../interfaces.js";
 
 export function searchCountries(
   query: string,

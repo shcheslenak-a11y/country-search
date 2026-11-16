@@ -1,0 +1,89 @@
+body {
+    width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    margin:30px auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 300px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+#search {
+    border: none;
+    height: inherit;
+    padding: 0;
+    outline: none !important;
+}
+
+main {
+    height: 600px;
+}
+
+.results {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%
+}
+
+.card h2{
+    margin: 0
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 70px;
+    border: 1px solid black;
+}
+
+#modal-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+#modal > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px
+}

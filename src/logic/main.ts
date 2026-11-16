@@ -1,8 +1,8 @@
-import { Error404 } from "../errors";
-import { CardInfo } from "../interfaces";
-import { handleErrors } from "./handleErrors";
-import { mapCountryResponse } from "./mapCountryResponse";
-import { searchCountries } from "./searchCountries";
+import { Error404 } from "../errors.js";
+import { CardInfo } from "../interfaces.js";
+import { handleErrors } from "./handleErrors.js";
+import { mapCountryResponse } from "./mapCountryResponse.js";
+import { searchCountries } from "./searchCountries.js";
 
 export function createMain(
   resultHandler: (data: Array<CardInfo>) => void,
