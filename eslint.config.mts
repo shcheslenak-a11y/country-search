@@ -6,7 +6,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 
 export default defineConfig([
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,html,css}"],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,html,css, json}"],
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
@@ -21,5 +21,5 @@ export default defineConfig([
       "prefer-const": "error",
     },
   },
-  globalIgnores(["dist/**/*"]),
+  globalIgnores(["docs/**/*"]),
 ]);

@@ -13,9 +13,7 @@ export function createMain(
   let controller: AbortController | null = null;
   let latest_query: string | null = null;
   return function (query: string) {
-    console.log("Q", query);
     if (latest_query === query) {
-      console.log("dup");
       return;
     }
     latest_query = query;

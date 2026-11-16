@@ -98,7 +98,6 @@ export function init() {
     history.showModal();
   });
   document.body.append(header, openHistory, main, footer, modal, history);
-  console.log("i");
 }
 
 function fillModal(data: CardInfo) {
@@ -135,7 +134,6 @@ function createCard(data: CardInfo) {
 }
 
 function showResult(data: Array<CardInfo>) {
-  console.log("s");
   const main = document.getElementsByTagName("main")[0];
   main?.replaceChildren();
   const results = createElement("div", { class: "results" });
