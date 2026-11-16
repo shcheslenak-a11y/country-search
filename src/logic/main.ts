@@ -10,7 +10,14 @@ export function createMain(
   otherErrorsHandler: (err: Error) => void,
 ): (query: string) => void {
   let controller: AbortController | null = null;
+  let latest_query: string | null = null;
   return function (query: string) {
+    console.log("Q", query);
+    if (latest_query === query) {
+      console.log("dup");
+      return;
+    }
+    latest_query = query;
     if (controller) {
       controller.abort();
       controller = null;
@@ -18,7 +25,7 @@ export function createMain(
     controller = new AbortController();
     searchCountries(
       query,
-      AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]),
+      AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]),
     )
       .then(mapCountryResponse)
       .then(resultHandler)
