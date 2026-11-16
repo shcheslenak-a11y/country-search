@@ -26,8 +26,20 @@ function save() {
   storage.setItem(storageLocation, JSON.stringify([...cache.entries()]));
 }
 
+function createLoadingScreen() {
+  const main = document.getElementsByTagName("main")[0];
+  main?.replaceChildren();
+  const wrapper = createElement("div", { class: "e404" });
+  wrapper.append(
+    createElement("img", { src: "assets/gear.gif", alt: "Loading Animation" }),
+    createElement("label", {}, "Loading"),
+  );
+  main?.append(wrapper);
+}
+
 const main = createMain(showResult, e404, showError, cache);
 const search = debounce((query: string) => {
+  createLoadingScreen();
   main(query);
 }, 200);
 
