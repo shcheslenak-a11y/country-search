@@ -12,8 +12,9 @@ export function createMain(
 ): (query: string) => void {
   let controller: AbortController | null = null;
   let latest_query: string | null = null;
+  let running = false;
   return function (query: string) {
-    if (latest_query === query) {
+    if (latest_query === query && running) {
       return;
     }
     latest_query = query;
@@ -25,10 +26,19 @@ export function createMain(
     if (cache.has(query)) dataSource = Promise.resolve(cache.get(query) || []);
     else {
       controller = new AbortController();
+      running = true;
       dataSource = searchCountries(
         query,
-        AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]),
+        AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]),
       )
+        .then((data) => {
+          running = false;
+          return data;
+        })
+        .catch((e) => {
+          running = false;
+          throw e;
+        })
         .then(mapCountryResponse)
         .then((data) => {
           cache.set(query, data);
