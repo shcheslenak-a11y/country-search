@@ -61,7 +61,11 @@ header {
 
 footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+footer img{
+    height: 24px;
 }
 
 .button {

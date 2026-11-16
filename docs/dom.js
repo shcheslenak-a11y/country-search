@@ -14,8 +14,16 @@ const cache = new Map(JSON.parse(storage.getItem(storageLocation) || "[]"));
 function save() {
     storage.setItem(storageLocation, JSON.stringify([...cache.entries()]));
 }
+function createLoadingScreen() {
+    const main = document.getElementsByTagName("main")[0];
+    main?.replaceChildren();
+    const wrapper = createElement("div", { class: "e404" });
+    wrapper.append(createElement("img", { src: "assets/gear.gif", alt: "Loading Animation" }), createElement("label", {}, "Loading"));
+    main?.append(wrapper);
+}
 const main = createMain(showResult, e404, showError, cache);
 const search = debounce((query) => {
+    createLoadingScreen();
     main(query);
 }, 200);
 export function init() {
@@ -27,7 +35,7 @@ export function init() {
     input.addEventListener("input", () => {
         search(input.value);
     });
-    header.append(createElement("img", { src: "assets/search" }), input);
+    header.append(createElement("img", { src: "assets/glass.png" }), input);
     const main = createElement("main");
     const footer = createElement("footer");
     const course = createElement("a", {
@@ -85,12 +93,12 @@ function fillModal(data) {
     const modal = document.getElementById("modal");
     const content = document.getElementById("modal-content");
     content?.replaceChildren();
-    content?.append(createElement("img", { src: data.flag }), createElement("h2", {}, data.name), createElement("label", {}, `Capital: ${data.capital}`), createElement("label", {}, `Region: ${data.region}`), createElement("label", {}, `Area: ${data.area || 0} km^2`), createElement("label", {}, `population: ${data.population}`), createElement("label", {}, `languages: ${data.languages.join(", ")}`), createElement("label", {}, `currencies: ${data.currencies.join(", ")}`));
+    content?.append(createElement("img", { src: data.flag, alt: "Flag image" }), createElement("h2", {}, data.name), createElement("label", {}, `Capital: ${data.capital}`), createElement("label", {}, `Region: ${data.region}`), createElement("label", {}, `Area: ${data.area || 0} km^2`), createElement("label", {}, `population: ${data.population}`), createElement("label", {}, `languages: ${data.languages.join(", ")}`), createElement("label", {}, `currencies: ${data.currencies.join(", ")}`));
     modal.showModal();
 }
 function createCard(data) {
     const card = createElement("div", { class: "card" });
-    card.append(createElement("img", { src: data.flag }), createElement("h2", {}, data.name), createElement("label", {}, `Capital: ${data.capital}`), createElement("label", {}, `Region: ${data.region}`));
+    card.append(createElement("img", { src: data.flag, alt: "Flag image" }), createElement("h2", {}, data.name), createElement("label", {}, `Capital: ${data.capital}`), createElement("label", {}, `Region: ${data.region}`));
     card.addEventListener("click", () => {
         fillModal(data);
     });
