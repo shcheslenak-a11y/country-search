@@ -1,0 +1,47 @@
+{
+  "name": "country-search",
+  "version": "1.0.0",
+  "description": "Task: [github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/country-search/README.md](https://github.com/rolling-scopes-school/tasks/blob/master/fullstack-engineering/tasks/country-search/README.md)",
+  "homepage": "https://github.com/shcheslenak-a11y/country-search#readme",
+  "bugs": {
+    "url": "https://github.com/shcheslenak-a11y/country-search/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shcheslenak-a11y/country-search.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx tsc && node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "format": "npx eslint --fix",
+    "lint": "npx eslint .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "npm run format",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/seedrandom": "^3.0.8",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "globals": "^17.14.0",
+    "jest": "^30.5.2",
+    "jiti": "^2.7.0",
+    "lint-staged": "^17.6.0",
+    "prettier": "3.2.5",
+    "seedrandom": "^3.0.5",
+    "ts-jest": "^29.4.15",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1"
+  }
+}
