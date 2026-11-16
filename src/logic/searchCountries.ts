@@ -1,9 +1,16 @@
-import { Country } from "../interfaces.js";
+import { Error404, HTTPError } from "../errors";
+import { Country } from "../interfaces";
 
 export function searchCountries(
   query: string,
   signal: AbortSignal,
 ): Promise<Array<Country>> {
-  console.log(query, signal);
-  throw new Error("NotImplemented");
+  if (query.length === 0) return Promise.resolve([]);
+  return fetch(`https://countries.dev/name/${query}`, { signal: signal })
+    .then((response) => {
+      if (response.ok) return response;
+      if (response.status === 404) throw new Error404(query);
+      throw new HTTPError(response.status, response.statusText);
+    })
+    .then((resp) => resp.json());
 }
