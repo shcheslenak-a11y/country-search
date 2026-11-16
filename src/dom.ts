@@ -40,7 +40,7 @@ export function init() {
   input.addEventListener("input", () => {
     search(input.value);
   });
-  header.append(createElement("img", { src: "assets/search" }), input);
+  header.append(createElement("img", { src: "assets/glass.png" }), input);
 
   const main = createElement("main");
 
@@ -106,7 +106,7 @@ function fillModal(data: CardInfo) {
   content?.replaceChildren();
 
   content?.append(
-    createElement("img", { src: data.flag }),
+    createElement("img", { src: data.flag, alt: "Flag image" }),
     createElement("h2", {}, data.name),
     createElement("label", {}, `Capital: ${data.capital}`),
     createElement("label", {}, `Region: ${data.region}`),
@@ -122,7 +122,7 @@ function fillModal(data: CardInfo) {
 function createCard(data: CardInfo) {
   const card = createElement("div", { class: "card" });
   card.append(
-    createElement("img", { src: data.flag }),
+    createElement("img", { src: data.flag, alt: "Flag image" }),
     createElement("h2", {}, data.name),
     createElement("label", {}, `Capital: ${data.capital}`),
     createElement("label", {}, `Region: ${data.region}`),
