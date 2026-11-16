@@ -1,0 +1,2 @@
+export declare function handleErrors(error: Error, callback404: (err: Error) => void, callbackHTTP: (err: Error) => void, timeout: (err: Error) => void, others: (err: Error) => void): void;
+//# sourceMappingURL=handleErrors.d.ts.map
