@@ -5,6 +5,19 @@ export function handleErrors(
   timeout: (err: Error) => void,
   others: (err: Error) => void,
 ): void {
-  console.log(error, callback404, callbackHTTP, timeout, timeout, others);
-  throw new Error("NotImplemented");
+  function getCallback(name: string) {
+    switch (name) {
+      case "Error404":
+        return callback404;
+      case "HTTPError":
+        return callbackHTTP;
+      case "TimeoutError":
+        return timeout;
+      case "AbortError":
+        return () => {};
+      default:
+        return others;
+    }
+  }
+  getCallback(error.name)(error);
 }
