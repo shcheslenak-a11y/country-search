@@ -6,7 +6,7 @@ import {
   beforeEach,
   afterEach,
 } from "@jest/globals";
-import { debounce } from "../../src/logic/debounce";
+import { debounce } from "../../docs/logic/debounce";
 
 describe("debounce function", () => {
   beforeEach(() => {

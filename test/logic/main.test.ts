@@ -6,8 +6,8 @@ import {
   beforeAll,
   afterAll,
 } from "@jest/globals";
-import { createMain } from "../../src/logic/main";
-import { debounce } from "../../src/logic/debounce";
+import { createMain } from "../../docs/logic/main";
+import { debounce } from "../../docs/logic/debounce";
 
 describe("main function", () => {
   beforeAll(() => {

@@ -1,6 +1,6 @@
 import { describe, expect, test, jest } from "@jest/globals";
-import { handleErrors } from "../../src/logic/handleErrors";
-import { Error404, HTTPError } from "../../src/errors";
+import { handleErrors } from "../../docs/logic/handleErrors";
+import { Error404, HTTPError } from "../../docs/errors";
 
 describe("handleErrors function", () => {
   test("should handle 404 error", () => {

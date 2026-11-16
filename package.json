@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "npx tsc && node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "format": "npx eslint --fix",
     "lint": "npx eslint .",
     "prepare": "husky"

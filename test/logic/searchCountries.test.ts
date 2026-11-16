@@ -1,6 +1,6 @@
 import { describe, expect, test, jest, afterAll } from "@jest/globals";
-import { searchCountries } from "../../src/logic/searchCountries";
-import { Error404, HTTPError } from "../../src/errors";
+import { searchCountries } from "../../docs/logic/searchCountries";
+import { Error404, HTTPError } from "../../docs/errors";
 
 const controller = new AbortController();
 
