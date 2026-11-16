@@ -80,7 +80,7 @@ export interface CardInfo {
   borders?: Array<string>;
   region: string;
   population: number;
-  languages: Array<string>;
-  currencies: Array<string>;
+  languages: Array<string | undefined>;
+  currencies: Array<string | undefined>;
   area?: number;
 }
