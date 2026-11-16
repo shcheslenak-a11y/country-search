@@ -71,6 +71,7 @@ footer {
     align-items: center;
     border-radius: 70px;
     border: 1px solid black;
+    margin: 0 auto;
 }
 
 #modal-content{

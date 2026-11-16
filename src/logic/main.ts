@@ -8,6 +8,7 @@ export function createMain(
   resultHandler: (data: Array<CardInfo>) => void,
   e404Handler: (err: Error404) => void,
   otherErrorsHandler: (err: Error) => void,
+  cache: Map<string, Array<CardInfo>> = new Map(),
 ): (query: string) => void {
   let controller: AbortController | null = null;
   let latest_query: string | null = null;
@@ -22,12 +23,21 @@ export function createMain(
       controller.abort();
       controller = null;
     }
-    controller = new AbortController();
-    searchCountries(
-      query,
-      AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]),
-    )
-      .then(mapCountryResponse)
+    let dataSource: Promise<Array<CardInfo>>;
+    if (cache.has(query)) dataSource = Promise.resolve(cache.get(query) || []);
+    else {
+      controller = new AbortController();
+      dataSource = searchCountries(
+        query,
+        AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]),
+      )
+        .then(mapCountryResponse)
+        .then((data) => {
+          cache.set(query, data);
+          return data;
+        });
+    }
+    dataSource
       .then(resultHandler)
       .catch((e) =>
         handleErrors(

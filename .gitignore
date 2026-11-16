@@ -1,4 +1,2 @@
 node_modules
-docs
-!docs/index.html
-!docs/styles.css
+docs/*

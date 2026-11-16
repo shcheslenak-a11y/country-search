@@ -3,6 +3,9 @@ import { createMain } from "./logic/main.js";
 import { debounce } from "./logic/debounce.js";
 import { Error404 } from "./errors.js";
 
+const storage = window.localStorage;
+const storageLocation = "searchHistory";
+
 function createElement(
   tag: string,
   attibutes = {},
@@ -15,13 +18,27 @@ function createElement(
   return element;
 }
 
-const search = debounce(createMain(showResult, e404, showError), 200);
+const cache: Map<string, Array<CardInfo>> = new Map(
+  JSON.parse(storage.getItem(storageLocation) || "[]"),
+);
+
+function save() {
+  storage.setItem(storageLocation, JSON.stringify([...cache.entries()]));
+}
+
+const main = createMain(showResult, e404, showError, cache);
+const search = debounce((query: string) => {
+  main(query);
+}, 200);
 
 export function init() {
   const header = createElement("header");
-  const input = createElement("input", { id: "search", type: "text" });
+  const input = createElement("input", {
+    id: "search",
+    type: "text",
+  }) as HTMLInputElement;
   input.addEventListener("input", () => {
-    search((input as HTMLInputElement).value);
+    search(input.value);
   });
   header.append(createElement("img", { src: "assets/search" }), input);
 
@@ -47,26 +64,41 @@ export function init() {
   footer.append(course, "2026", github);
 
   const modal = createElement("dialog", { id: "modal" });
-  const button = createElement("div", { class: "button" }, "Close");
-  button.addEventListener("click", () => {
+  const buttonCloseModal = createElement("div", { class: "button" }, "Close");
+  buttonCloseModal.addEventListener("click", () => {
     (modal as HTMLDialogElement).close();
   });
   const inner = createElement("div");
-  inner.append(createElement("div", { id: "modal-content" }), button);
+  inner.append(createElement("div", { id: "modal-content" }), buttonCloseModal);
   modal.append(inner);
-  document.body.append(header, main, footer, modal);
+
+  const history = createElement("dialog") as HTMLDialogElement;
+  const buttonCloseHistory = createElement("div", { class: "button" }, "Close");
+  buttonCloseHistory.addEventListener("click", () => {
+    (history as HTMLDialogElement).close();
+  });
+  const innerHistory = createElement("div");
+  const table = createElement("table", { id: "history" });
+  innerHistory.append(table, buttonCloseHistory);
+  history.append(innerHistory);
+
+  const openHistory = createElement("div", { class: "button" }, "History");
+  openHistory.addEventListener("click", () => {
+    table.replaceChildren();
+    cache.keys().forEach((k) => {
+      const row = createElement("tr");
+      row.append(createElement("td", {}, k));
+      row.addEventListener("click", () => {
+        input.value = k;
+        search(k);
+        history.close();
+      });
+      table.append(row);
+    });
+    history.showModal();
+  });
+  document.body.append(header, openHistory, main, footer, modal, history);
   console.log("i");
-  showResult([
-    {
-      name: "test",
-      capital: "test",
-      languages: [],
-      currencies: [],
-      flag: "",
-      region: "A/b",
-      population: 0,
-    },
-  ]);
 }
 
 function fillModal(data: CardInfo) {
@@ -109,6 +141,7 @@ function showResult(data: Array<CardInfo>) {
   const results = createElement("div", { class: "results" });
   results.append(...data.map((item) => createCard(item)));
   main?.append(results);
+  save();
 }
 
 function e404(err: Error404) {
