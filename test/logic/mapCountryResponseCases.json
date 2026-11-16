@@ -1,0 +1,10 @@
+[
+    {
+        "in": [{"area":652230,"cioc":"AFG","flag":"🇦🇫","name":"Afghanistan","flags":{"png":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png","svg":"https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"},"latlng":[33,65],"region":"Asia","borders":["IRN","PAK","TKM","UZB","TJK","CHN"],"capital":"Kabul","demonym":"Afghan","languages":[{"name":"Pashto","iso639_1":"ps","iso639_2":"pus","nativeName":"پښتو"},{"name":"Uzbek","iso639_1":"uz","iso639_2":"uzb","nativeName":"Oʻzbek"},{"name":"Turkmen","iso639_1":"tk","iso639_2":"tuk","nativeName":"Türkmen"}],"subregion":"Southern Asia","timezones":["UTC+04:30"],"alpha2Code":"AF","alpha3Code":"AFG","currencies":[{"code":"AFN","name":"Afghan afghani","symbol":"؋"}],"nativeName":"افغانستان","population":40218234,"independent":true,"numericCode":"004","callingCodes":["93"],"topLevelDomain":[".af"],"populationDensity":61.66}],
+        "out": [{"area":652230,"name":"Afghanistan","flag": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png","region":"Asia/Southern Asia","borders":["IRN","PAK","TKM","UZB","TJK","CHN"],"capital":"Kabul","languages":["پښتو(Pashto)","Oʻzbek(Uzbek)", "Türkmen(Turkmen)"],"currencies":["Afghan afghani"],"population":40218234}]
+    },
+    {
+        "in": [],
+        "out": []
+    }
+]
