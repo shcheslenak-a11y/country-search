@@ -47,8 +47,9 @@ header {
     height:100px
 }
 
-.card h2{
-    margin: 0
+.card h2,label{
+    margin: 0;
+    padding-left: 5%;
 }
 
 .error {

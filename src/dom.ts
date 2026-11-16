@@ -125,7 +125,7 @@ function createCard(data: CardInfo) {
     createElement("img", { src: data.flag }),
     createElement("h2", {}, data.name),
     createElement("label", {}, `Capital: ${data.capital}`),
-    createElement("region", {}, `Region: ${data.region}`),
+    createElement("label", {}, `Region: ${data.region}`),
   );
   card.addEventListener("click", () => {
     fillModal(data);
